@@ -4,6 +4,7 @@ import routes from "./routes/index.js";
 import userRoute from "./routes/user.js";
 import colors from "colors";
 import db from "./config/mongoose.js";
+import passportLocal from "./config/passport-local.js";
 import expressLayout from "express-ejs-layouts";
 
 const app = express();
@@ -19,6 +20,7 @@ app.set("layout extractScripts", true);
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
+app.use(express.urlencoded({ extended: true }));
 // app.get("/", (req, res) => {
 //   return res.json("This is my running server");
 // });
