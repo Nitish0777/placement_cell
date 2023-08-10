@@ -6,6 +6,7 @@ import colors from "colors";
 import db from "./config/mongoose.js";
 import passportLocal from "./config/passport-local.js";
 import expressLayout from "express-ejs-layouts";
+import student from "./routes/student.js";
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use(expressLayout);
 
 app.use("/", routes);
 app.use("/user", userRoute);
+app.use("/student", student);
 
 const port = process.env.PORT || 6000;
 

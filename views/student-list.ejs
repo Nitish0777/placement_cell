@@ -1,0 +1,35 @@
+<h2>Students List for All</h2>
+
+<hr />
+
+<p>Download Student List in Excel Format</p>
+<button>
+  <a href="/student/download">Download</a>
+</button>
+<br />
+<table>
+  <tr>
+    <th>Student Name</th>
+    <th>Email</th>
+    <th>Contact</th>
+    <th>Batch</th>
+    <th>College</th>
+  </tr>
+  <% for(students of studentList){ %>
+  <tr>
+    <td>
+      <a href="/student/student-detail/<%= students._id %>"
+        ><%= students.name %></a
+      >
+    </td>
+    <td><%= students.email %></td>
+    <td><%= students.contact %></td>
+    <td><%= students.batch %></td>
+    <td><%= students.college %></td>
+  </tr>
+  <% } %> <% if(studentList.length == 0){ %>
+  <tr>
+    <td colspan="5">No Data Found</td>
+  </tr>
+  <% } %>
+</table>
