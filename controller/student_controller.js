@@ -56,3 +56,39 @@ export const getStudentDetail = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+
+export const createStudentScore = async (req, res) => {
+  try {
+    const { dsa, webdesign, react } = req.body;
+    const newScore = new Course({
+      dsa,
+      webdesign,
+      react,
+    });
+    await newScore.save();
+    console.log("Student score saved", newScore);
+    return res.redirect("back");
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+    return res.redirect("back");
+  }
+};
+
+export const createCompanyData = async (req, res) => {
+  try {
+    const date = req.body.interviewDate.subString(0, 10);
+    const { companyName, placementStatus, studentId } = req.body;
+    const newCompany = new Company({
+      companyName,
+      date,
+      placementStatus,
+      studentIds: studentId,
+    });
+    await newCompany.save();
+    console.log("Company data saved", newCompany);
+    return res.redirect("back");
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+    return res.redirect("back");
+  }
+};
