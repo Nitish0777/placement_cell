@@ -4,13 +4,16 @@ import {
   createCompanyData,
   createStudentData,
   createStudentScore,
+  destroyStudent,
+  getStudentDetail,
   getStudentList,
 } from "../controller/student_controller.js";
 
 const router = express.Router();
 
 router.get("/students_lists", getStudentList);
-router.get("/student-detail/:id");
+router.get("/student-detail/:id", getStudentDetail);
+router.get("/destroy-student/:id", destroyStudent);
 
 router.post("/create-student-data", createStudentData);
 router.post("/create-student-score", createStudentScore);

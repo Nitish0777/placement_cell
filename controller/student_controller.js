@@ -92,3 +92,15 @@ export const createCompanyData = async (req, res) => {
     return res.redirect("back");
   }
 };
+
+export const destroyStudent = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Company.findByIdAndDelete(id);
+    console.log("Student deleted");
+    return res.redirect("back");
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+    return res.redirect("back");
+  }
+};
