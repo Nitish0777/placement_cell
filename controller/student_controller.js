@@ -1,6 +1,7 @@
 import Student from "../models/student_detail.js";
 import Company from "../models/company.js";
 import Course from "../models/course_score.js";
+import { Parser } from "json2csv";
 
 export const createStudentData = async (req, res) => {
   try {
@@ -129,5 +130,34 @@ export const companyUpdate = async (req, res) => {
   } catch (error) {
     res.status(404).json({ message: error.message });
     return res.redirect("back");
+  }
+};
+
+export const csv = async (req, res) => {
+  try {
+    const company = await Company.find({}).populate("studentId");
+    const fields = [
+      "studentId.id",
+      "studentId.name",
+      "studentId.college",
+      "studentId.batch",
+      "studentId.courseId.dsa",
+      "studentId.courseId.webdesign",
+      "studentId.courseId.react",
+      "companyName",
+      "interviewDate",
+      "placementStatus",
+    ];
+    const json2csvParser = new Parser({ fields, excelStrings: true });
+    let csvFormat = "";
+    for (comp of company) {
+      let temp = await comp.populate("studentId.courseId");
+      // console.log(temp);
+      csvFormat += json2csvParser.parse(temp);
+    }
+    res.attachment("placement.csv");
+    return res.send(csvFormat);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
   }
 };

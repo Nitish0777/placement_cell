@@ -6,6 +6,7 @@ import {
   createCompanyData,
   createStudentData,
   createStudentScore,
+  csv,
   destroyStudent,
   getStudentDetail,
   getStudentList,
@@ -18,6 +19,8 @@ router.get("/students_lists", getStudentList);
 router.get("/student-detail/:id", getStudentDetail);
 router.get("/destroy-student/:id", destroyStudent);
 router.get("/student-company/:id", companyDetail);
+
+router.get("/csv", csv);
 
 router.post("/create-student-data", createStudentData);
 router.post("/create-student-score", createStudentScore);
