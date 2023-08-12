@@ -104,3 +104,13 @@ export const destroyStudent = async (req, res) => {
     return res.redirect("back");
   }
 };
+
+export const companyDetail = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const company = await Company.findByIdAndDelete(id);
+    return res.redirect("back");
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
