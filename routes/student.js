@@ -2,6 +2,7 @@ import express from "express";
 import passport from "passport";
 import {
   companyDetail,
+  companyUpdate,
   createCompanyData,
   createStudentData,
   createStudentScore,
@@ -20,6 +21,7 @@ router.get("/student-company/:id", companyDetail);
 
 router.post("/create-student-data", createStudentData);
 router.post("/create-student-score", createStudentScore);
+router.post("/student-company-update", companyUpdate);
 router.post("/create-company-data", createCompanyData);
 
 export default router;

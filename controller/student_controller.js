@@ -114,3 +114,20 @@ export const companyDetail = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+
+export const companyUpdate = async (req, res) => {
+  try {
+    let company = await Company.findByIdAndUpdate(
+      req.body.id,
+      {
+        placementStatus: req.body.placementStatus,
+      },
+      { new: true }
+    );
+
+    return res.redirect("back");
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+    return res.redirect("back");
+  }
+};
