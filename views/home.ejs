@@ -1,5 +1,14 @@
 <h1>Home page</h1>
 <hr />
+<% if (user) { %>
+<h3>Hi <%= user.name %></h3>
+<button>
+  <a href="/user/logout">Logout</a>
+</button>
+<% } else { %>
+<h3>Hi Guest</h3>
+<% } %>
+<hr />
 <h3>Login/SignUp</h3>
 <button>
   <a href="/user/sign-in">Login</a>

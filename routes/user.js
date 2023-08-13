@@ -20,11 +20,8 @@ router.post("/create", create);
 
 router.post(
   "/create-session",
-  passport.authenticate(
-    "local",
-    { failureRedirect: "/user/sign-in" },
-    createSession
-  )
+  passport.authenticate("local", { failureRedirect: "/user/sign-in" }),
+  createSession
 );
 
 router.get("/log-out", logOut);

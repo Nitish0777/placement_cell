@@ -15,16 +15,40 @@ import company from "../models/company.js";
 
 const router = express.Router();
 
-router.get("/students_lists", getStudentList);
-router.get("/student-detail/:id", getStudentDetail);
-router.get("/destroy-student/:id", destroyStudent);
-router.get("/student-company/:id", companyDetail);
+router.get("/students_lists", passport.checkAuthentication, getStudentList);
+router.get(
+  "/student-detail/:id",
+  passport.checkAuthentication,
+  getStudentDetail
+);
+router.get(
+  "/destroy-student/:id",
+  passport.checkAuthentication,
+  destroyStudent
+);
+router.get("/student-company/:id", passport.checkAuthentication, companyDetail);
 
-router.get("/csv", csv);
+router.get("/csv", passport.checkAuthentication, csv);
 
-router.post("/create-student-data", createStudentData);
-router.post("/create-student-score", createStudentScore);
-router.post("/student-company-update", companyUpdate);
-router.post("/create-company-data", createCompanyData);
+router.post(
+  "/create-student-data",
+  passport.checkAuthentication,
+  createStudentData
+);
+router.post(
+  "/create-student-score",
+  passport.checkAuthentication,
+  createStudentScore
+);
+router.post(
+  "/student-company-update",
+  passport.checkAuthentication,
+  companyUpdate
+);
+router.post(
+  "/create-company-data",
+  passport.checkAuthentication,
+  createCompanyData
+);
 
 export default router;

@@ -10,9 +10,9 @@ export const home = async (req, res) => {
 
 export const signIn = async (req, res) => {
   try {
-    // if (req.isAuthenticated()) {
-    //   return res.redirect(`/`);
-    // }
+    if (req.isAuthenticated()) {
+      return res.redirect(`/`);
+    }
     return res.render("sign-in");
   } catch (error) {
     console.log("Error in sign in page", error);
@@ -21,21 +21,24 @@ export const signIn = async (req, res) => {
 
 export const signUp = async (req, res) => {
   try {
-    // if (req.isAuthenticated()) {
-    //   return res.redirect(`/`);
-    // }
+    if (req.isAuthenticated()) {
+      return res.redirect(`/`);
+    }
     return res.render("sign-up");
   } catch (error) {
     console.log("Error in sign up page", error);
   }
 };
 
-export const studentPage = async (req, res) => {
-  try {
-    return res.render("student-page");
-  } catch (error) {
-    console.log("Error in student page", error);
-  }
+export const studentPage = (req, res) => {
+  // try {
+  //   if (req.isAuthenticated()) {
+  //     return res.render("student-page");
+  //   }
+  return res.redirect("/user/sign-in");
+  // } catch (error) {
+  //   console.log("Error in student page", error);
+  // }
 };
 
 export const logOut = async (req, res) => {

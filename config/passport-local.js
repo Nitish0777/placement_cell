@@ -1,6 +1,7 @@
 import passport from "passport";
-import LocalStrategy from "passport-local";
+import { Strategy as LocalStrategy } from "passport-local";
 import User from "../models/user.js";
+import bcrypt from "bcrypt";
 
 // authentication using passport
 passport.use(
@@ -11,7 +12,9 @@ passport.use(
     async (email, password, done) => {
       try {
         let user = await User.findOne({ email: email });
-        if (!user || user.password != password) {
+        let pas = await bcrypt.compare(password, user.password);
+
+        if (!user || !pas) {
           return done(null, false);
         }
         return done(null, user);
@@ -32,6 +35,9 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser(async (id, done) => {
   try {
     let user = await User.findById(id);
+    if (!user) {
+      return done(null, false);
+    }
     return done(null, user);
   } catch (error) {
     console.log("Error in finding user --> Passport", error);

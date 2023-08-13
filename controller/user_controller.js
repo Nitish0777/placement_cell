@@ -3,6 +3,7 @@ import User from "../models/user.js";
 
 export const createSession = async (req, res) => {
   try {
+    console.log("User is Authenticated", req.user);
     return res.redirect("/");
   } catch (error) {
     console.log("Error in creating session", error);
